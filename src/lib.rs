@@ -15,8 +15,8 @@ pub extern "system" fn DllMain(
     dll_module: winapi::HINSTANCE,
     call_reason: winapi::DWORD,
     reserved: winapi::LPVOID)
+    -> winapi::BOOL
 {
-    // Declare these constants locally since they are only used in this function
     const DLL_PROCESS_ATTACH: winapi::DWORD = 1;
     const DLL_PROCESS_DETACH: winapi::DWORD = 0;
 
@@ -25,6 +25,7 @@ pub extern "system" fn DllMain(
         DLL_PROCESS_DETACH => (),
         _ => ()
     }
+    winapi::TRUE
 }
 
 fn demo_init() {
