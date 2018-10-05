@@ -1,5 +1,14 @@
+#![cfg(windows)]
+
 extern crate winapi;
-extern crate kernel32;
+
+use winapi::{
+    shared::{
+        minwindef,
+        minwindef::{BOOL, DWORD, HINSTANCE, LPVOID}
+    },
+    um::consoleapi,
+};
 
 /// Entry point which will be called by the system once the DLL has been loaded
 /// in the target process. Declaring this function is optional.
@@ -12,23 +21,23 @@ extern crate kernel32;
 #[no_mangle]
 #[allow(non_snake_case, unused_variables)]
 pub extern "system" fn DllMain(
-    dll_module: winapi::HINSTANCE,
-    call_reason: winapi::DWORD,
-    reserved: winapi::LPVOID)
-    -> winapi::BOOL
+    dll_module: HINSTANCE,
+    call_reason: DWORD,
+    reserved: LPVOID)
+    -> BOOL
 {
-    const DLL_PROCESS_ATTACH: winapi::DWORD = 1;
-    const DLL_PROCESS_DETACH: winapi::DWORD = 0;
+    const DLL_PROCESS_ATTACH: DWORD = 1;
+    const DLL_PROCESS_DETACH: DWORD = 0;
 
     match call_reason {
         DLL_PROCESS_ATTACH => demo_init(),
         DLL_PROCESS_DETACH => (),
         _ => ()
     }
-    winapi::TRUE
+    minwindef::TRUE
 }
 
 fn demo_init() {
-    unsafe { kernel32::AllocConsole() };
+    unsafe { consoleapi::AllocConsole() };
     println!("Hello, world!");
 }
