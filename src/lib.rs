@@ -20,7 +20,7 @@ use winapi::{
 /// though it is unclear what that that means exactly for DllMain.
 #[no_mangle]
 #[allow(non_snake_case, unused_variables)]
-pub extern "system" fn DllMain(
+extern "system" fn DllMain(
     dll_module: HINSTANCE,
     call_reason: DWORD,
     reserved: LPVOID)
