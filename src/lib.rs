@@ -1,14 +1,8 @@
 #![cfg(windows)]
 
-extern crate winapi;
-
-use winapi::{
-    shared::{
-        minwindef,
-        minwindef::{BOOL, DWORD, HINSTANCE, LPVOID}
-    },
-    um::consoleapi,
-};
+use winapi::shared::minwindef;
+use winapi::shared::minwindef::{BOOL, DWORD, HINSTANCE, LPVOID};
+use winapi::um::consoleapi;
 
 /// Entry point which will be called by the system once the DLL has been loaded
 /// in the target process. Declaring this function is optional.
